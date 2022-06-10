@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:validation="http://www.mulesoft.org/schema/mule/validation" xmlns:cluster="http://www.mulesoft.org/schema/mule/ee/cluster"
+	xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties"
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd
+http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd
+http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mule/validation/current/mule-validation.xsd">
+	<http:listener-config name="Main_listener" doc:name="HTTP Listener config" doc:id="e25282ae-ca7a-4066-af06-6bc179a04ec6" >
+		<http:listener-connection host="${secure::http.host}" port="${secure::http.port}" />
+	</http:listener-config>
+	<apikit:config outboundHeadersMapName="outboundHeadersMapName" httpStatusVarName="httpStatus" doc:name="Router" doc:id="91fe795c-1dca-47f3-b8b4-7e34ea7f4021" name="customer-phone-number-verify-api-config" api="customer-phone-number-verify-api.raml" />
+	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="9ed15b3b-83e7-4de7-b3c1-3f208a3d9782" file="dev-secure.yaml" key="Nigus12" >
+		<secure-properties:encrypt algorithm="Blowfish" />
+	</secure-properties:config>
+	<configuration doc:name="Configuration" doc:id="dd7ae5bc-9620-48a0-b46f-64bf966e9917" defaultErrorHandler-ref="global_error_handlerError_Handler" >
+	</configuration>
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="19b123e1-fd7d-42fd-b4df-023e4df0e001" basePath="/number_verification">
+		<http:request-connection host="api.apilayer.com" protocol="HTTPS"/>
+	</http:request-config>
+	<validation:config name="Validation_Config" doc:name="Validation Config" doc:id="82ce6c94-7127-41dd-9dd5-05c0a037afc5" />
+</mule>

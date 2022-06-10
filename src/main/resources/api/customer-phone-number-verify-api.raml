@@ -1,0 +1,32 @@
+#%RAML 1.0
+title: customer phone number verify API
+
+uses:
+  myLib: library.raml
+
+/customer:
+  securedBy:
+    - myLib.mySec
+  get:
+    queryParameters:
+      phoneNumber:
+        type: string
+        required: false
+        maxLength: 11
+        minLength: 10
+
+    responses:
+      200:
+        body:
+          application/json:
+            type: myLib.dataTypes
+            example: !include example.raml
+    is:
+      - myLib.errorResp
+
+
+
+
+               
+   
+
