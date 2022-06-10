@@ -17,7 +17,7 @@ http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mu
 	<configuration doc:name="Configuration" doc:id="dd7ae5bc-9620-48a0-b46f-64bf966e9917" defaultErrorHandler-ref="global_error_handlerError_Handler" >
 	</configuration>
 	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="19b123e1-fd7d-42fd-b4df-023e4df0e001" basePath="/number_verification">
-		<http:request-connection host="api.apilayer.com" protocol="HTTPS"/>
+		<http:request-connection host="/api"/>
 	</http:request-config>
 	<validation:config name="Validation_Config" doc:name="Validation Config" doc:id="82ce6c94-7127-41dd-9dd5-05c0a037afc5" />
 </mule>
